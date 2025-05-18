@@ -1,0 +1,11 @@
+<h2 class="page-title">Menu</h2>
+<div *ngFor="let category of categories" class="category-section">
+  <h3 class="category-title">{{ category }}</h3>
+  <div class="card-container">
+    <div *ngFor="let food of getFoodsByCategory(category)" class="food-card">
+      <h4>{{ food.name }}</h4>
+      <p>${{ food.price }}</p>
+      <button (click)="addToCart(food)">Add to Cart</button>
+    </div>
+  </div>
+</div>
