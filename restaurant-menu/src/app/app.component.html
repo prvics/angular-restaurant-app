@@ -1,6 +1,9 @@
 <nav *ngIf="showNavBar">
+  <button class="theme-toggle" (click)="toggleTheme()">🌓</button>
   <a routerLink="/menu">Menu</a>
   <a routerLink="/cart">Cart</a>
 </nav>
 
 <router-outlet></router-outlet>
+<app-toast></app-toast>
+<app-confirm-toast></app-confirm-toast>

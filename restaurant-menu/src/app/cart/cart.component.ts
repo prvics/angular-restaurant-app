@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { Food } from '../models/food';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,10 @@ import { Food } from '../models/food';
 export class CartComponent {
   items: Food[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.items = this.cartService.getCartItems();
@@ -26,17 +30,22 @@ export class CartComponent {
   clearCart() {
     this.cartService.clearCart();
     this.items = [];
-    alert('Your cart has been cleared.');
+    this.toastService.showToast('Your cart has been cleared.', 'info');
   }
 
   removeItem(item: Food) {
     this.items = this.items.filter((i) => i !== item);
     this.cartService.removeFromCart(item);
-    alert(`${item.name} has been removed from the cart.`);
+    this.toastService.showToast(
+      `${item.name} has been removed from the cart.`,
+      'info'
+    );
   }
 
   checkout() {
-    alert('Thank you for your order!');
-    this.clearCart();
+    this.toastService.showToast('Thank you for your order!', 'success');
+    setTimeout(() => {
+      this.clearCart();
+    }, 2280);
   }
 }

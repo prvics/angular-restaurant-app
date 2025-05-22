@@ -1,0 +1,7 @@
+<div class="confirm-toast" *ngIf="visible">
+  <p>{{ message }}</p>
+  <div class="buttons">
+    <button class="yes" (click)="confirmFn()">Yes</button>
+    <button class="no" (click)="cancelFn()">No</button>
+  </div>
+</div>

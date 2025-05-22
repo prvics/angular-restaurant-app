@@ -12,7 +12,7 @@
 .category-title {
   text-align: center;
   font-size: 1.5rem;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 15px;
   border-bottom: 2px solid #eee;
   padding-bottom: 5px;
@@ -26,15 +26,17 @@
 }
 
 .food-card {
-  background-color: #fdfdfd;
-  border: 1px solid #ddd;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid #ccc;
   border-radius: 12px;
   padding: 16px;
-  width: 200px;
+  width: 220px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .food-card h4 {
@@ -48,7 +50,7 @@
 }
 
 .food-card button {
-  background-color: #8b0000;
+  background-color: var(--accent);
   color: white;
   border: none;
   padding: 8px 12px;
@@ -59,4 +61,5 @@
 
 .food-card button:hover {
   background-color: #a30000;
+  opacity: 0.9;
 }

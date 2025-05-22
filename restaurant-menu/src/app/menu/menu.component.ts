@@ -3,6 +3,9 @@ import { FoodService } from '../services/food.service';
 import { Food } from '../models/food';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../services/cart.service';
+import { ToastService } from '../services/toast.service';
+import { ConfirmToastComponent } from '../shared/confirm-toast/confirm-toast.component';
+import { ConfirmToastService } from '../services/confirm-toast.service';
 
 @Component({
   selector: 'app-menu',
@@ -17,7 +20,9 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private foodService: FoodService,
-    private cartService: CartService
+    private cartService: CartService,
+    private toastService: ToastService,
+    private confirmToastService: ConfirmToastService
   ) {}
 
   categoryOrder = ['Appetizer', 'Soup', 'Main', 'Dessert'] as const;
@@ -38,7 +43,33 @@ export class MenuComponent implements OnInit {
   }
 
   addToCart(food: Food) {
+    const alreadyInCart = this.cartService
+      .getCartItems()
+      .some((item) => item.id === food.id);
+
+    if (alreadyInCart) {
+      this.confirmToastService.showConfirm(
+        `${food.name} is already in your cart. Add another one?`,
+        () => {
+          this.cartService.addToCart(food);
+          this.toastService.showToast(
+            `${food.name} has been added again.`,
+            'success'
+          );
+        },
+        () => {
+          this.toastService.showToast(
+            `${food.name} was not added again.`,
+            'info'
+          );
+        }
+      );
+      return;
+    }
     this.cartService.addToCart(food);
-    alert(`${food.name} has been added to the cart.`);
+    this.toastService.showToast(
+      `${food.name} has been added to the cart.`,
+      'success'
+    );
   }
 }
