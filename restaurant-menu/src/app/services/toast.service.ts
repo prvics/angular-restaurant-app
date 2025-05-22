@@ -3,21 +3,32 @@ import { Subject } from 'rxjs';
 
 export type ToastType = 'success' | 'error' | 'info';
 
-@Injectable({
-  providedIn: 'root',
-})
+export interface Toast {
+  id: number;
+  message: string;
+  type: ToastType;
+}
+
+@Injectable({ providedIn: 'root' })
 export class ToastService {
-  private toastSubject = new Subject<{ message: string; type: ToastType }>();
+  private toasts: Toast[] = [];
+  private toastSubject = new Subject<Toast[]>();
   toastState$ = this.toastSubject.asObservable();
+  private idCounter = 0;
 
   showToast(message: string, type: ToastType = 'info') {
-    console.log(
-      'ToastService: showToast called with message:',
+    const toast: Toast = {
+      id: ++this.idCounter,
       message,
-      'type',
-      type
-    );
+      type,
+    };
 
-    this.toastSubject.next({ message, type });
+    this.toasts.unshift(toast);
+    this.toastSubject.next([...this.toasts]);
+
+    setTimeout(() => {
+      this.toasts = this.toasts.filter((t) => t.id !== toast.id);
+      this.toastSubject.next([...this.toasts]);
+    }, 3000);
   }
 }

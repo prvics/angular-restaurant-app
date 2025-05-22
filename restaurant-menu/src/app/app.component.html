@@ -2,6 +2,9 @@
   <button class="theme-toggle" (click)="toggleTheme()">🌓</button>
   <a routerLink="/menu">Menu</a>
   <a routerLink="/cart">Cart</a>
+  <a routerLink="/search">Search</a>
+  <a *ngIf="auth.isAdmin()" routerLink="/stats">📊 Statistics</a>
+  <button *ngIf="auth.isAdmin()" (click)="logout()">Logout</button>
 </nav>
 
 <router-outlet></router-outlet>

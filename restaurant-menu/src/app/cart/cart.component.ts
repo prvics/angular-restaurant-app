@@ -42,10 +42,17 @@ export class CartComponent {
     );
   }
 
+  clearCartWithCheckout() {
+    this.cartService.clearCart();
+    this.items = [];
+    setTimeout(() => {
+      this.toastService.showToast('Your cart has been cleared.', 'info');
+    }, 3000);
+  }
+
   checkout() {
     this.toastService.showToast('Thank you for your order!', 'success');
-    setTimeout(() => {
-      this.clearCart();
-    }, 2280);
+
+    this.clearCart();
   }
 }

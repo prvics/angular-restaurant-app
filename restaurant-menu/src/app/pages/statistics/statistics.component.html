@@ -1,0 +1,28 @@
+<h2>📊 Menu Statistics</h2>
+
+<div class="stats-container">
+  <div class="stat-card">
+    <h3>Total Foods</h3>
+    <p>{{ totalFoods }}</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Average Price</h3>
+    <p>\${{ averagePrice.toFixed(2) }}</p>
+  </div>
+
+  <div class="stat-card" *ngIf="mostExpensiveFood">
+    <h3>Most Expensive</h3>
+    <p>{{ mostExpensiveFood.name }} – \${{ mostExpensiveFood.price }}</p>
+  </div>
+
+  <div class="stat-card" *ngIf="isAdmin">
+    <h3>Sold Count (All Foods)</h3>
+    <ul class="sold-list">
+      <li *ngFor="let food of foods">
+        <strong>{{ food.name }}:</strong> {{ food.soldCount }} sold
+        <button (click)="increment(food)" class="inc-btn">+1</button>
+      </li>
+    </ul>
+  </div>
+</div>

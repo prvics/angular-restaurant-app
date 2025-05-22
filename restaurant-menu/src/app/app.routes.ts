@@ -1,10 +1,31 @@
 import { Routes } from '@angular/router';
-import { MenuComponent } from './menu/menu.component';
-import { CartComponent } from './cart/cart.component';
-import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'menu', component: MenuComponent },
-  { path: 'cart', component: CartComponent },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./home/home.component').then((m) => m.HomeComponent),
+  },
+  {
+    path: 'menu',
+    loadComponent: () =>
+      import('./menu/menu.component').then((m) => m.MenuComponent),
+  },
+  {
+    path: 'cart',
+    loadComponent: () =>
+      import('./cart/cart.component').then((m) => m.CartComponent),
+  },
+  {
+    path: 'stats',
+    loadComponent: () =>
+      import('./pages/statistics/statistics.component').then(
+        (m) => m.StatisticsComponent
+      ),
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login.component').then((m) => m.LoginComponent),
+  },
 ];

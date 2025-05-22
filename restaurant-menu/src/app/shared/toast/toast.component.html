@@ -1,9 +1,11 @@
-<div class="toast-card" *ngIf="showToast" [ngClass]="type">
-  <div class="toast-title">
-    <span *ngIf="type === 'success'">✅</span>
-    <span *ngIf="type === 'error'">❌</span>
-    <span *ngIf="type === 'info'">ℹ️</span>
-    {{ type | titlecase }}
+<div class="toast-container">
+  <div class="toast-card" *ngFor="let toast of toasts" [ngClass]="toast.type">
+    <div class="toast-title">
+      <span *ngIf="toast.type === 'success'">✅</span>
+      <span *ngIf="toast.type === 'error'">❌</span>
+      <span *ngIf="toast.type === 'info'">ℹ️</span>
+      {{ toast.type | titlecase }}
+    </div>
+    <div class="toast-message">{{ toast.message }}</div>
   </div>
-  <div class="toast-message">{{ message }}</div>
 </div>

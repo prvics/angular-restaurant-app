@@ -17,6 +17,7 @@ import { ConfirmToastService } from '../services/confirm-toast.service';
 export class MenuComponent implements OnInit {
   foods: Food[] = [];
   categories: string[] = [];
+  searchTerm: string = '';
 
   constructor(
     private foodService: FoodService,
@@ -39,7 +40,16 @@ export class MenuComponent implements OnInit {
   }
 
   getFoodsByCategory(category: string): Food[] {
-    return this.foods.filter((food) => food.category === category);
+    return this.foods
+      .filter((food) => food.category === category)
+      .filter((food) => {
+        const term = this.searchTerm.toLowerCase();
+        return (
+          food.name.toLowerCase().includes(term) ||
+          food.category.toLowerCase().includes(term) ||
+          food.price.toString().includes(term)
+        );
+      });
   }
 
   addToCart(food: Food) {

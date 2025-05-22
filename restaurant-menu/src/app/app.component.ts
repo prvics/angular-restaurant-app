@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { ToastComponent } from './shared/toast/toast.component';
 import { ConfirmToastComponent } from './shared/confirm-toast/confirm-toast.component';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent {
   title(title: any) {
     throw new Error('Method not implemented.');
   }
-  constructor(private router: Router) {}
+  constructor(private router: Router, public auth: AuthService) {}
 
   isDark = false;
 
@@ -33,5 +34,10 @@ export class AppComponent {
     this.isDark = !this.isDark;
     const root = document.documentElement;
     root.classList.toggle('dark-theme', this.isDark);
+  }
+
+  logout() {
+    this.auth.setAdmin(false);
+    this.router.navigate(['/']);
   }
 }

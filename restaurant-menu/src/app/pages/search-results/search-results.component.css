@@ -1,0 +1,39 @@
+.search-container {
+  padding: 0 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  margin: 16px auto 24px auto;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  display: block;
+  font-size: 1rem;
+}
+
+.search-card {
+  background-color: var(--card-bg);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.empty {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #888;
+  margin-top: 40px;
+}

@@ -3,4 +3,5 @@ export interface Food {
   name: string;
   category: 'Appetizer' | 'Soup' | 'Main' | 'Dessert';
   price: number;
+  soldCount: number;
 }
